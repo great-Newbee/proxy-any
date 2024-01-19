@@ -16,9 +16,19 @@ async function handleRequest(request) {
   // 目标地址
   const actualUrlStr = url.pathname
   const directUrl = new URL(actualUrlStr);
-  //directUrl.host = actualUrlStr.replace(/^https?:\/\//, '');
-  console.log("directUrl:",directUrl)
-  const modifiedRequest = new Request(directUrl.toString(), {
+  url.host = directUrl.host;
+  if(directUrl.pathname !== undefined && directUrl.pathname !==""){
+    url.pathname = directUrl.pathname;
+  }
+  if(directUrl.search !== undefined && directUrl.search !==""){
+    url.search = directUrl.search;
+  }
+  if(directUrl.hash !== undefined && directUrl.hash !==""){
+    url.hash = directUrl.hash;
+  }
+  // url.host = actualUrlStr.replace(/^https?:\/\//, '');
+ 
+  const modifiedRequest = new Request(url.toString(), {
     headers: request.headers,
     method: request.method,
     body: request.body,
