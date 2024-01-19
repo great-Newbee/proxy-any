@@ -17,7 +17,7 @@ async function handleRequest(request) {
   }
   const headers_Origin = request.headers.get("Access-Control-Allow-Origin") || "*"
   // 代理网站
-  const actualUrlStr = url.pathname+ url.search + url.hash
+  const actualUrlStr = url.pathname
   url.host = actualUrlStr.replace(/^https?:\/\//, '');
   const modifiedRequest = new Request(url.toString(), {
     headers: request.headers,
@@ -105,7 +105,7 @@ function createLandingPage() {
         event.preventDefault();
         const input = document.getElementById('url');
         const actualUrl = input.value;
-        const proxyUrl = '/proxy-any/' + actualUrl;
+        const proxyUrl = actualUrl;
         location.href = proxyUrl;
       });
     </script>
