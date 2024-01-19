@@ -16,10 +16,12 @@ async function handleRequest(request) {
     return createLandingPage();
   }
   const headers_Origin = request.headers.get("Access-Control-Allow-Origin") || "*"
-  // 代理网站
+  // 目标地址
   const actualUrlStr = url.pathname
-  url.host = actualUrlStr.replace(/^https?:\/\//, '');
-  const modifiedRequest = new Request(url.toString(), {
+  const directUrl = new URL(actualUrlStr);
+  //directUrl.host = actualUrlStr.replace(/^https?:\/\//, '');
+  console.log("directUrl:",directUrl)
+  const modifiedRequest = new Request(directUrl.toString(), {
     headers: request.headers,
     method: request.method,
     body: request.body,
