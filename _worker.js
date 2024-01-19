@@ -12,7 +12,7 @@ export default {
 async function handleRequest(request) {
   const url = new URL(request.url);
     // 新增：检查用户是否直接访问代理地址
-  if (url.pathname === '/proxy/') {
+  if (url.pathname === '/proxy-any/') {
     return createLandingPage();
   }
   const headers_Origin = request.headers.get("Access-Control-Allow-Origin") || "*"
